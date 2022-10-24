@@ -1,6 +1,6 @@
 # SSOManager
 
-***Swift Package that helps you implement Facebook, Google and Apple social login in a simple way, It is developed originally by Ahmad Mahmoud then maintained and refactored into a package by me
+***Swift Package that helps you implement Facebook, Google and Apple social login in a simple way, It is developed originally by [Ahmad Mahmoud](https://linkedin.com/in/amssm) then maintained and refactored into a package by me***
 
 ### Contents
 - [Features](#features)
