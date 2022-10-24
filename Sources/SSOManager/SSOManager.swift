@@ -11,15 +11,21 @@ public class SSOManager: NSObject, UIApplicationDelegate {
     
     // MARK: - Variables
     private let ssoMethods: [SSOProtocol]
-    private(set) public static var shared: SSOManager!
+    private static var _shared: SSOManager?
+    public static var shared: SSOManager {
+        guard let object = _shared else {
+            fatalError("You must call SSOManager.initialize(withMethods) before accessing this object")
+        }
+        return object
+    }
     
     // MARK: - Init
-    public init(ssoMethods: [SSOProtocol]) {
+    private init(ssoMethods: [SSOProtocol]) {
         self.ssoMethods = ssoMethods
     }
     
     public static func initialize(withMethods methods: [SSOProtocol]) {
-        self.shared = SSOManager(ssoMethods: methods)
+        self._shared = SSOManager(ssoMethods: methods)
     }
     
     // MARK: - UIApplicationDelegate
@@ -57,7 +63,7 @@ public class SSOManager: NSObject, UIApplicationDelegate {
     
     // MARK: - Public Functions
     @available(iOS 13, *)
-    public func signIn(strategy: SSOStrategy) async -> Result<SSOUser, Error> {
+    public func signIn(strategy: SSOStrategy) async -> Result<SSOUser, SSOManagerError> {
         return await withCheckedContinuation { continuation in
             self.signIn(strategy: strategy, successAction: { ssoUser in
                 continuation.resume(returning: .success(ssoUser))
@@ -84,7 +90,7 @@ public class SSOManager: NSObject, UIApplicationDelegate {
         }
     }
     
-    public func signOut(with strategy: SSOStrategy) {
+    public func signOut(from strategy: SSOStrategy) {
         self.ssoMethods.first { $0.strategy == strategy }?.signOut()
     }
 }
