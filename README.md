@@ -42,21 +42,55 @@
 [Google](https://developers.google.com/identity/sign-in/ios/start-integrating) <br/>
 [Apple](https://medium.com/@priya_talreja/sign-in-with-apple-using-swift-5cd8695a46b6) <br/>
 
-2- You must Initialize SSOManager passing the required methods with required IDs in `AppDelegate.application(didFinishLaunchingWithOptions:)`
+2- Set URL Types & URL Queried URL Schemes in your Info.plist like following replacing with your IDs
+```
+<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>FBAuth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb[YOUR-FB-ID]</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>GoogleAuth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>[YOUR-REVRSED-GOOGLE-CLIENT-ID]</string>
+			</array>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fb</string>
+		<string>fbapi</string>
+		<string>fbauth2</string>
+	</array>
+```
+<br/>
+
+3- You must Initialize SSOManager passing the required methods with required IDs in `AppDelegate.application(didFinishLaunchingWithOptions:)`
 ```
 let ssoMethods = [FacebookSignIn(appId: "", facebookAppId: "", facebookClientToken: ""),
-                  GoogleSignIn(clientID: ""),
+                  GoogleSignIn(clientID: ""), // Not Reversed ID
                   AppleSignIn()]
 SSOManager.initialize(withMethods: ssoMethods)
 ```
 <br/>
 
-3- implement required callbacks in your AppDelegate and let SSOManager gets notified:
+4- implement required callbacks in your AppDelegate and let SSOManager gets notified:
 ```
 func application(_ application: UIApplication,
                  didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
      let ssoMethods: [SSOProtocol] = [FacebookSignIn(appId: "", facebookAppId: "", facebookClientToken: ""),
-                                      GoogleSignIn(clientID: ""),
+                                      GoogleSignIn(clientID: ""), // Not Reversed ID
                                       AppleSignIn()]
      SSOManager.initialize(withMethods: ssoMethods)
      _ = SSOManager.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -79,7 +113,7 @@ func application(_ app: UIApplication,
      SSOManager.shared.application(app, open: url, options: options) ?? false
 }
 ```
-4- Then you can use it directly as an action for your button or so:
+5- Then you can use it directly as an action for your button or so:
 ```
 SSOManager.shared.signIn(strategy: .facebook, // or .google or .apple
                          successAction: { ssoUserData in 
@@ -115,7 +149,7 @@ public enum SSOManagerError: LocalizedError {
 }
 ```
 ----
-5- to sign out use
+6- to sign out use
 ```
 SSOManager.shared.signOut(from: .facebook // or .google or .apple )
 ```
@@ -123,5 +157,6 @@ Or Sign out from all by invoking
 ```
 SSOManager.shared.signOut()
 ```
+**For Detailed Sample head to: [Sample](/Sample)**
 
 
