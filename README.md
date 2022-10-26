@@ -55,11 +55,11 @@ SSOManager.initialize(withMethods: ssoMethods)
 ```
 func application(_ application: UIApplication,
                  didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-     let ssoMethods = [FacebookSignIn(appId: "", facebookAppId: "", facebookClientToken: ""),
-                       GoogleSignIn(clientID: ""),
-                       AppleSignIn()]
+     let ssoMethods: [SSOProtocol] = [FacebookSignIn(appId: "", facebookAppId: "", facebookClientToken: ""),
+                                      GoogleSignIn(clientID: ""),
+                                      AppleSignIn()]
      SSOManager.initialize(withMethods: ssoMethods)
-     _ = SSOManager.shared.application?(application, didFinishLaunchingWithOptions: launchOptions)
+     _ = SSOManager.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
      return true
 }
 
@@ -67,16 +67,16 @@ func application(_ application: UIApplication,
                  open url: URL,
                  sourceApplication: String?,
                  annotation: Any) -> Bool {
-     SSOManager.shared.application?(application,
-                                    open: url,
-                                    sourceApplication: sourceApplication,
-                                    annotation: annotation) ?? false
+     SSOManager.shared.application(application,
+                                   open: url,
+                                   sourceApplication: sourceApplication,
+                                   annotation: annotation) ?? false
 }
 
 func application(_ app: UIApplication,
                  open url: URL,
                  options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-     SSOManager.shared.application?(app, open: url, options: options) ?? false
+     SSOManager.shared.application(app, open: url, options: options) ?? false
 }
 ```
 4- Then you can use it directly as an action for your button or so:
