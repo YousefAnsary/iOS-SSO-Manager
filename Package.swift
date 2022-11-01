@@ -28,5 +28,6 @@ let package = Package(
             dependencies: [.product(name: "FacebookCore", package: "facebook-ios-sdk"),
                            .product(name: "FacebookLogin", package: "facebook-ios-sdk"),
                            .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS")]),
-    ]
+    ],
+    swiftLanguageVersions: [.v4]
 )
