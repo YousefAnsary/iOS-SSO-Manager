@@ -15,10 +15,10 @@ public class FacebookSignIn: NSObject, SSOProtocol {
     public let strategy: SSOStrategy = .facebook
     private lazy var facebookLoginManager = LoginManager()
     
-    public init(appId: String, facebookAppId: String, facebookClientToken: String) {
+    public init(bundleID: String, facebookAppId: String, facebookClientToken: String) {
         Settings.shared.appID = facebookAppId
         // https://developers.facebook.com/docs/facebook-login/access-tokens/
-        Settings.shared.clientToken = "\(appId)|\(facebookClientToken)"
+        Settings.shared.clientToken = "\(bundleID)|\(facebookClientToken)"
     }
     
     public func application(_ application: UIApplication,

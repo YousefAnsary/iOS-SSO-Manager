@@ -18,7 +18,7 @@ public enum SSOManagerError: LocalizedError {
     case unableToFetchTopVC
     case unknownError(Error?)
 
-    var errorDescription: String {
+    public var errorDescription: String {
         switch self {
         case .strategyNotFound(let strategy):
             return "SSO Strategy \(strategy) not provided!"
