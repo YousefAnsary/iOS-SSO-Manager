@@ -56,6 +56,10 @@ public class FacebookSignIn: NSObject, SSOProtocol {
                 errorAction(.unknownError(error!))
                 return
             }
+            guard !(facebookResult?.isCancelled ?? true) else {
+                errorAction(.userError)
+                return
+            }
             guard facebookResult?.grantedPermissions != nil,
                   let token = AccessToken.current?.tokenString else {
                 errorAction(.userError)
