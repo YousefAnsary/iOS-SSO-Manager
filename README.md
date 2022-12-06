@@ -78,9 +78,9 @@
 
 3- You must Initialize SSOManager passing the required methods with required IDs in `AppDelegate.application(didFinishLaunchingWithOptions:)`
 ```
-let ssoMethods = [FacebookSignIn(appId: "", facebookAppId: "", facebookClientToken: ""),
-                  GoogleSignIn(clientID: ""), // Not Reversed ID
-                  AppleSignIn()]
+let ssoMethods: [SSOProtocol] = [FacebookSignIn(bundleID: "", facebookAppId: "", facebookClientToken: ""),
+                                 GoogleSignIn(clientID: ""), // Not Reversed ID
+                                 AppleSignIn()]
 SSOManager.initialize(withMethods: ssoMethods)
 ```
 <br/>
