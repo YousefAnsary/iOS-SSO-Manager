@@ -130,12 +130,18 @@ signIn(strategy: SSOStrategy) async -> Result<SSOUser, SSOManagerError>
 ----
 ```
 public struct SSOUser {
+    public struct GoogleToken {
+        let accessToken: String?
+        let idToken: String?
+    }
+    
     public let id: String?
     public let name: String?
     public let firstName: String?
     public let familyName: String?
     public let email: String?
     public let ssoToken: String?
+    public let googleTokens: GoogleToken?
 }
 
 public enum SSOManagerError: LocalizedError {
