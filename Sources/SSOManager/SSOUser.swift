@@ -27,7 +27,7 @@ public struct SSOUser {
          familyName: String? = nil,
          email: String?,
          ssoToken: String?,
-         googleTokens: GoogleToken?) {
+         googleTokens: GoogleToken? = nil) {
         self.id = id
         self.name = name
         self.firstName = firstName
@@ -40,6 +40,6 @@ public struct SSOUser {
     init(name: String?,
          email: String?,
          ssoToken: String?) {
-        self.init(id: nil, name: name, email: email, ssoToken: ssoToken, googleTokens: nil)
+        self.init(id: nil, name: name, email: email, ssoToken: ssoToken)
     }
 }
