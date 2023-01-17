@@ -42,11 +42,14 @@ public class GoogleSignIn: NSObject, SSOProtocol {
                 return
             }
             if let userProfile = googleUser?.profile,
-               let token = googleUser?.authentication.idToken {
+               let idToken = googleUser?.authentication.idToken,
+               let accessToken = googleUser?.authentication.accessToken {
                 let ssoUser = SSOUser(id: googleUser?.userID,
                                       name: userProfile.name,
                                       email: userProfile.email,
-                                      ssoToken: token)
+                                      ssoToken: idToken,
+                googleTokens: SSOUser.GoogleToken(accessToken: accessToken,
+                                                  idToken: idToken))
                 successAction(ssoUser)
             } else {
                 errorAction(.userError)
