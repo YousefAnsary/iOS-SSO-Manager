@@ -81,10 +81,12 @@ public class FacebookSignIn: NSObject, SSOProtocol {
                 errorAction(.unknownError(graphError))
                 return
             }
+            let id = userInfo["id"] as? String
             let name = userInfo["name"] as? String
             let email = userInfo["email"] as? String
             //
-            let ssoUser = SSOUser(name: name,
+            let ssoUser = SSOUser(id: id,
+                                  name: name,
                                   email: email,
                                   ssoToken: token)
             successAction(ssoUser)
