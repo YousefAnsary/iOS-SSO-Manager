@@ -131,8 +131,8 @@ signIn(strategy: SSOStrategy) async -> Result<SSOUser, SSOManagerError>
 ```
 public struct SSOUser {
     public struct GoogleToken {
-        let accessToken: String?
-        let idToken: String?
+        public let accessToken: String?
+        public let idToken: String?
     }
     
     public let id: String?

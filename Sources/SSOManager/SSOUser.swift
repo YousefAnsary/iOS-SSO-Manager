@@ -9,8 +9,8 @@ public struct SSOUser {
     
     /// this type is only for Google SSO
     public struct GoogleToken {
-        let accessToken: String?
-        let idToken: String?
+        public let accessToken: String?
+        public let idToken: String?
     }
     
     public let id: String?
