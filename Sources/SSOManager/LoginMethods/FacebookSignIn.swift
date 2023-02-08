@@ -43,6 +43,14 @@ public class FacebookSignIn: NSObject, SSOProtocol {
     }
     
     public func signOut() {
+        if let token = AccessToken.current?.tokenString {
+            let request = GraphRequest(graphPath: "/me/permissions/",
+                                       parameters: [:],
+                                       tokenString: token,
+                                       version: nil,
+                                       httpMethod: .delete)
+            request.start()
+        }
         self.facebookLoginManager.logOut()
     }
     
