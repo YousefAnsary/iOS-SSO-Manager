@@ -29,8 +29,8 @@
 
 **Swift Package Manager**
 
-```
-.package(url: "https://github.com/YousefAnsary/iOS-SSO-Manager.git", from: "1.0")
+```swift
+.package(url: "https://github.com/YousefAnsary/iOS-SSO-Manager.git", from: "0.3.0")
 ```
 
 ----
@@ -77,7 +77,7 @@
 <br/>
 
 3- You must Initialize SSOManager passing the required methods with required IDs in `AppDelegate.application(didFinishLaunchingWithOptions:)`
-```
+```swift
 let ssoMethods: [SSOProtocol] = [FacebookSignIn(bundleID: "", facebookAppId: "", facebookClientToken: ""),
                                  GoogleSignIn(clientID: ""), // Not Reversed ID
                                  AppleSignIn()]
@@ -86,7 +86,7 @@ SSOManager.initialize(withMethods: ssoMethods)
 <br/>
 
 4- implement required callbacks in your AppDelegate and let SSOManager gets notified:
-```
+```swift
 func application(_ application: UIApplication,
                  didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
      let ssoMethods: [SSOProtocol] = [FacebookSignIn(appId: "", facebookAppId: "", facebookClientToken: ""),
@@ -114,7 +114,7 @@ func application(_ app: UIApplication,
 }
 ```
 5- Then you can use it directly as an action for your button or so:
-```
+```swift
 SSOManager.shared.signIn(strategy: .facebook, // or .google or .apple
                          successAction: { ssoUserData in 
                             // Do your action here like calling your BE to provide the token or so 
@@ -124,11 +124,11 @@ SSOManager.shared.signIn(strategy: .facebook, // or .google or .apple
 
 ```
 also it has another version that is available only on iOS 13 and above 
-```
+```swift
 signIn(strategy: SSOStrategy) async -> Result<SSOUser, SSOManagerError>
 ```
 ----
-```
+```swift
 public struct SSOUser {
     public struct GoogleToken {
         public let accessToken: String?
@@ -156,11 +156,11 @@ public enum SSOManagerError: LocalizedError {
 ```
 ----
 6- to sign out use
-```
+```swift
 SSOManager.shared.signOut(from: .facebook // or .google or .apple )
 ```
 Or Sign out from all by invoking
-```
+```swift
 SSOManager.shared.signOut()
 ```
 **For Detailed Sample head to: [Sample](/Sample)**
